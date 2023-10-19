@@ -1,3 +1,13 @@
+packer {
+  required_version = ">= 1.7.0, < 2.0.0"
+  required_plugins {
+    virtualbox = {
+      version = ">= 1.0.0, < 2.0.0"
+      source  = "github.com/hashicorp/virtualbox"
+    }
+  }
+}
+
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
 }
@@ -16,7 +26,7 @@ source "virtualbox-iso" "debian" {
   ssh_password      = "vagrant"
   ssh_timeout       = "10000s"
   ssh_username      = "vagrant"
-  vboxmanage        = [["modifyvm", "{{.Name}}", "--memory", "1024"], ["modifyvm", "{{.Name}}", "--cpus", "1"]]
+  vboxmanage        = [["modifyvm", "{{.Name}}", "--memory", "1024"], ["modifyvm", "{{.Name}}", "--cpus", "1"], ["modifyvm", "{{.Name}}", "--nat-localhostreachable1", "on"]]
   vm_name           = "vm-debian12"
 }
 
