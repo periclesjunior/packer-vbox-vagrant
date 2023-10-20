@@ -1,9 +1,19 @@
+## TODO
+
 ```bash
 packer init packer.pkr.hcl
 ```
 
 ```bash
-PACKER_LOG=1 packer build .
+packer validate -var-file=debian-box-image.pkrvars.hcl .
+```
+
+```bash
+packer build -var-file=debian-box-image.pkrvars.hcl .
+```
+
+```bash
+PACKER_LOG=1 packer build -var-file=debian-box-image.pkrvars.hcl .
 ```
 
 ## Links
